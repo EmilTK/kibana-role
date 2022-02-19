@@ -4,12 +4,12 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: fedora-kibana
-    image: docker.io/pycontribs/fedora:latest
-    pre_build_image: true
-  - name: centos7-kibana
-    image: docker.io/pycontribs/centos:7
-    pre_build_image: true
+  # - name: fedora-kibana
+  #   image: docker.io/pycontribs/fedora:latest
+  #   pre_build_image: true
+  # - name: centos7-kibana
+  #   image: docker.io/pycontribs/centos:7
+  #   pre_build_image: true
   - name: centos8-kibana
     image: docker.io/pycontribs/centos:8
     pre_build_image: true
