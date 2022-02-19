@@ -34,6 +34,9 @@ galaxy_info:
     - name: CentOS
       versions:
         - all
+    - name: Fedora
+      versions:
+        - all
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

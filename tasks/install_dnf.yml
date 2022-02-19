@@ -1,0 +1,39 @@
+---
+- name: install elasticsearch rpm key
+  become: true
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Find all of the files inside this directory
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+    - ansible_facts['distribution_major_version'] == "8"
+  find:
+    paths: "/etc/yum.repos.d/"
+    patterns: "*.repo"
+  register: repos
+
+- name: Disable mirrorlist
+  when: repos is not skipped
+  with_items: "{{ repos.files }}"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '(\s+)mirrorlist='
+    replace: '\n#mirrorlist='
+
+- name: Enable baseurl - vault
+  when: repos is not skipped
+  with_items: "{{ repos.files }}"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '(\s+)#baseurl=http://mirror.centos.org'
+    replace: '\nbaseurl=http://vault.centos.org'
+
+- name: Install Kibana .rpm
+  become: true
+  dnf:
+    name: "/tmp/kibana-{{ kibana_version }}-x86_64.rpm"
+    state: present
+  notify: restart Kibana
+  tags: [install]
