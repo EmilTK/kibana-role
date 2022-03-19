@@ -13,9 +13,9 @@ platforms:
 #   - name: centos8-kibana
 #     image: docker.io/pycontribs/centos:8
 #     pre_build_image: true
-  - name: ubuntu-kibana
-    image: docker.io/pycontribs/ubuntu:latest
-    pre_build_image: true
+#   - name: ubuntu-kibana
+#     image: docker.io/pycontribs/ubuntu:latest
+#     pre_build_image: true
 provisioner:
   name: ansible
   inventory:
