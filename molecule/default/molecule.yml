@@ -21,6 +21,6 @@ provisioner:
   inventory:
     group_vars:
       all:
-        elastic_instance: 178.154.200.88
+        elastic_instance: "{{ lookup('env', 'EL_HOST') }}"
 verifier:
   name: ansible
